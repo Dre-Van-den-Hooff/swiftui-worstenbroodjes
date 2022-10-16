@@ -1,0 +1,47 @@
+query GetAllUsers {
+    getAllUsers {
+      id
+      username
+      stats {
+        worstenbroodjes
+        pizzas
+        paninis
+    }
+  }
+}
+
+query GetUserById($id: ID!) {
+    getById(id: $id) {
+      id
+      username
+      stats {
+        worstenbroodjes
+        pizzas
+        paninis
+      }
+    }
+  }
+  
+  mutation UpdateUsername($id: ID!, $newName: String!) {
+    updateName(id: $id, newName: $newName) {
+      id
+      username
+      stats {
+        worstenbroodjes
+        pizzas
+        paninis
+      }
+    }
+  }
+  
+  mutation UpdateUserStats($id: ID!, $stats: StatsInput!) {
+    updateStats(id: $id, stats: $stats) {
+      id
+      username
+      stats {
+        worstenbroodjes
+        pizzas
+        paninis
+      }
+    }
+  }
