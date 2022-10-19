@@ -37,9 +37,14 @@ struct SettingsView: View {
                         // TODO: Change to system preference
                     })
                 }
-                Section {
-                    Label("Verander gebruikersnaam", systemImage: "square.and.pencil")
-                }
+                
+                NavigationLink(destination: ChangeUsernameView(), label: {
+                    Section {
+                        Label("Verander gebruikersnaam", systemImage: "square.and.pencil")
+                    }
+                })
+                
+                
                 Section {
                     Label("Ga naar de website", systemImage: "link")
                 }

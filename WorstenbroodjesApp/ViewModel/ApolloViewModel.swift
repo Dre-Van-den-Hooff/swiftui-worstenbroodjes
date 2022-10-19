@@ -27,6 +27,10 @@ class ApolloViewModel: ObservableObject {
         ApolloModel()
     }
     
+    private func mockLogin(id: String) {
+        model.mockLogin(id: id)
+    }
+    x`
     private func fetchAllUsers()  {
         Network.shared.apolloClient.fetch(query: GetAllUsersQuery()) { result in
             switch result {
@@ -43,22 +47,27 @@ class ApolloViewModel: ObservableObject {
         }
     }
     
-    private func mockLogin(id: String) {
-        model.mockLogin(id: id)
+    func updateUserName(id: String, newName: String) {
+        Network.shared.apolloClient.perform(mutation: UpdateUsernameMutation(id: id, newName: newName)) { result in
+            switch result {
+            case .success:
+                print("success")
+                // refetch users
+            case .failure(let error):
+                print("Error! \(error)")
+            }
+        }
     }
     
-    //    func getById(id: String) {
-    //        Network.shared.apolloClient.fetch(query: GetUserByIdQuery(id: id)) { result in
-    //            switch result {
-    //            case .success(let graphQLResult):
-    //                if let user = graphQLResult.data?.getById {
-    //                      // do stuff
-    //                } else if let errors = graphQLResult.errors {
-    //                    print(errors)
-    //                }
-    //            case .failure(let error):
-    //                print("Error! \(error)")
-    //            }
-    //        }
-    //    }
+    func updateStats(id: String, stats: StatsInput) {
+        Network.shared.apolloClient.perform(mutation: UpdateUserStatsMutation(id: id, stats: stats)) { result in
+            switch result {
+            case .success:
+                print("success")
+                // refetch users
+            case .failure(let error):
+                print("Error! \(error)")
+            }
+        }
+    }
 }

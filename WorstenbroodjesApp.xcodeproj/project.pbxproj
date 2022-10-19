@@ -17,6 +17,7 @@
 		C993DAC528F703F200466C22 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = C993DAC428F703F200466C22 /* Apollo */; };
 		C993DAC828F712A300466C22 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = C993DAC728F712A300466C22 /* schema.json */; };
 		C993DACA28F7135C00466C22 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C993DAC928F7135C00466C22 /* Queries.graphql */; };
+		C994569028FC3CB90025B22A /* ChangeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */; };
 		C9EC761428F6C5BA00938696 /* WorstenbroodjesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC761328F6C5BA00938696 /* WorstenbroodjesAppApp.swift */; };
 		C9EC761628F6C5BA00938696 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC761528F6C5BA00938696 /* ContentView.swift */; };
 		C9EC761828F6C5BB00938696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9EC761728F6C5BB00938696 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		C993DAC128F6F04C00466C22 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C993DAC728F712A300466C22 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		C993DAC928F7135C00466C22 /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
+		C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameView.swift; sourceTree = "<group>"; };
 		C9EC761028F6C5BA00938696 /* WorstenbroodjesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorstenbroodjesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9EC761328F6C5BA00938696 /* WorstenbroodjesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorstenbroodjesAppApp.swift; sourceTree = "<group>"; };
 		C9EC761528F6C5BA00938696 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				C993DABD28F6F02600466C22 /* LeaderboardView.swift */,
 				C993DABF28F6F03200466C22 /* ProfileView.swift */,
 				C993DAC128F6F04C00466C22 /* SettingsView.swift */,
+				C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				C949423628F83A5C00FC7BA6 /* ApolloViewModel.swift in Sources */,
 				C993DABE28F6F02600466C22 /* LeaderboardView.swift in Sources */,
 				C949423828F83DCC00FC7BA6 /* ApolloModel.swift in Sources */,
+				C994569028FC3CB90025B22A /* ChangeUsernameView.swift in Sources */,
 				C949423228F837F900FC7BA6 /* API.swift in Sources */,
 				C949423428F8396600FC7BA6 /* Network.swift in Sources */,
 				C9EC761428F6C5BA00938696 /* WorstenbroodjesAppApp.swift in Sources */,

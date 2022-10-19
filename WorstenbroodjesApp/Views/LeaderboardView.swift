@@ -9,6 +9,9 @@ import SwiftUI
 
 struct LeaderboardView: View {
     @State private var selection: Int? = 1
+    @State private var showSheet: Bool = false
+    @State private var amount = 1
+    @State private var foodSelection: Food = .worstenbroodje
     @EnvironmentObject var apolloViewModel: ApolloViewModel
     
     var body: some View {
@@ -29,22 +32,25 @@ struct LeaderboardView: View {
                 Text("Panini's").tag(2 as Int?)
                 Text("Pizza's").tag(3 as Int?)
             }
-            .pickerStyle(SegmentedPickerStyle())
-            .buttonStyle(PlainButtonStyle())
+            .pickerStyle(.segmented)
             .padding(.horizontal)
         }
     }
     
     private var heading: some View {
         HStack {
-            Image(systemName: "cart")
-                .resizable()
-                .frame(width: 30, height: 30)
-                .padding(.horizontal)
-                .onTapGesture {
-                    // TODO
-                    // open drawer
-                }
+            Button {
+                showSheet.toggle()
+            } label: {
+                Image(systemName: "cart")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .padding(.horizontal)
+            }
+            .sheet(isPresented: $showSheet) {
+                sheetContent
+                    .presentationDetents([.large, .medium, .fraction(0.75)])
+            }
             
             Spacer()
             
@@ -89,11 +95,48 @@ struct LeaderboardView: View {
     
     private var topThree: some View {
         HStack {
-            
             ForEach(getTopThree(selection!)) { user in
                 Text(user.username)
             }
- 
+        }
+    }
+    
+    private var sheetContent: some View {
+        Form {
+            Section {
+                Picker("Kies een snack", selection: $foodSelection) {
+                    Text("Worstenbroodje").tag(Food.worstenbroodje)
+                    Text("Panini").tag(Food.panini)
+                    Text("Pizza").tag(Food.pizza)
+                }
+                .pickerStyle(.menu)
+            }
+            
+            Section {
+                Stepper("Aantal: \(amount)", value: $amount, in: 1...10)
+            }
+            
+            HStack {
+                Button("Annuleren") {
+                    showSheet.toggle()
+                }
+                
+                Spacer()
+                
+                Button("Bevestigen") {
+                    
+                    let worstenbroodjes = foodSelection == .worstenbroodje ? apolloViewModel.loggedInUser.stats.worstenbroodjes + amount : apolloViewModel.loggedInUser.stats.worstenbroodjes
+                    
+                    let paninis = foodSelection == .panini ? apolloViewModel.loggedInUser.stats.paninis + amount : apolloViewModel.loggedInUser.stats.paninis
+                    
+                    let pizzas = foodSelection == .pizza ? apolloViewModel.loggedInUser.stats.pizzas + amount : apolloViewModel.loggedInUser.stats.pizzas
+                    
+                    let updatedStats = StatsInput(totalSpent: 0, worstenbroodjes: worstenbroodjes, pizzas: pizzas, muffins: 0, paninis: paninis)
+                    
+                    apolloViewModel.updateStats(id: apolloViewModel.loggedInUser.id, stats: updatedStats)
+                    // TODO: Show success toast
+                }
+            }.buttonStyle(.borderless)
         }
     }
     
@@ -125,7 +168,6 @@ struct LeaderboardView: View {
                 a.stats.pizzas > b.stats.pizzas
             }
         default:
-            // Should never happen
             return apolloViewModel.users
         }
     }
@@ -134,6 +176,10 @@ struct LeaderboardView: View {
         Array(getSortedBy(selection).prefix(3))
     }
     
+    enum Food: String, Identifiable {
+        case worstenbroodje, panini, pizza
+        var id: Self { self }
+    }
 }
 
 
@@ -143,3 +189,4 @@ struct LeaderboardView_Previews: PreviewProvider {
             .environmentObject(ApolloViewModel())
     }
 }
+

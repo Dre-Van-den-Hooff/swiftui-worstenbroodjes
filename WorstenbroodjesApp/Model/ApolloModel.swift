@@ -7,13 +7,13 @@
 
 import Foundation
 
-typealias AllUserData = GetAllUsersQuery.Data.GetAllUser
+typealias UserData = GetAllUsersQuery.Data.GetAllUser
 
 struct ApolloModel: Decodable {
     var users: [User] = []
     var loggedInUser: User?
     
-    mutating func processAllUsers(_ users: [AllUserData]) -> Void {
+    mutating func processAllUsers(_ users: [UserData]) -> Void {
         self.users = users.map { user in
             User(user)
         }
@@ -28,7 +28,7 @@ struct ApolloModel: Decodable {
         var username: String
         var stats: Stats
         
-        init(_ user: AllUserData) {
+        init(_ user: UserData) {
             self.id = user.id
             self.username = user.username
             self.stats = Stats(user.stats!)
@@ -39,7 +39,7 @@ struct ApolloModel: Decodable {
             var pizzas: Int
             var paninis: Int
             
-            init(_ stats: AllUserData.Stat) {
+            init(_ stats: UserData.Stat) {
                 self.worstenbroodjes = stats.worstenbroodjes
                 self.paninis = stats.paninis
                 self.pizzas = stats.pizzas
