@@ -12,7 +12,7 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            Text("Profile")
+            Text("Profiel")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)

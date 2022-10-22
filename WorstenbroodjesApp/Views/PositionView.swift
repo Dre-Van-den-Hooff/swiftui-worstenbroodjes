@@ -38,7 +38,7 @@ struct PositionView: View {
             }
             Text(name)
                 .foregroundColor(.white)
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 20, weight: .bold))
         }
     }
 }

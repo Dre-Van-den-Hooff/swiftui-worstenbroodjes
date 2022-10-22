@@ -14,8 +14,8 @@
             filePath = "WorstenbroodjesApp/Views/LeaderboardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "getSortedBy(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "WorstenbroodjesApp/Views/LeaderboardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "LeaderboardView"
             landmarkType = "14">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "WorstenbroodjesApp/Views/LeaderboardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "getStats(of:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,10 +62,58 @@
             filePath = "WorstenbroodjesApp/Views/LeaderboardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "getStats(of:_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B6A3A2BD-B083-4077-A348-875AA0747BE7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WorstenbroodjesApp/Views/LeaderboardView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "topThree"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "B6A3A2BD-B083-4077-A348-875AA0747BE7 - 560822a7765f310f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: WorstenbroodjesApp.ApolloModel.User)&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.Spacer, WorstenbroodjesApp.PositionView, SwiftUI.Spacer)&gt;&gt; in WorstenbroodjesApp.LeaderboardView.topThree.getter : some"
+                  moduleName = "WorstenbroodjesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/drevandenhooff/Documents/HoGent/JAAR3/SEM1/SWIFT/WorstenbroodjesApp/WorstenbroodjesApp/Views/LeaderboardView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "111"
+                  endingLineNumber = "111"
+                  offsetFromSymbolStart = "204">
+               </Location>
+               <Location
+                  uuid = "B6A3A2BD-B083-4077-A348-875AA0747BE7 - 1cdcf3b736f3004d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int, WorstenbroodjesApp.ApolloModel.User) -&gt; SwiftUI.TupleView&lt;(SwiftUI.Spacer, WorstenbroodjesApp.PositionView, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(offset: Swift.Int, element: WorstenbroodjesApp.ApolloModel.User)&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.Spacer, WorstenbroodjesApp.PositionView, SwiftUI.Spacer)&gt;&gt; in WorstenbroodjesApp.LeaderboardView.topThree.getter : some"
+                  moduleName = "WorstenbroodjesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/drevandenhooff/Documents/HoGent/JAAR3/SEM1/SWIFT/WorstenbroodjesApp/WorstenbroodjesApp/Views/LeaderboardView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

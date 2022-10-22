@@ -9,19 +9,23 @@ import SwiftUI
 import AlertToast
 
 struct LeaderboardView: View {
+    
+    @EnvironmentObject var apolloViewModel: ApolloViewModel
+    @Environment(\.colorScheme) var colorScheme
+    
     @State private var showSheet = false
     @State private var amount = 1
     @State private var foodSelection: Food = .worstenbroodje
     @State private var succesToast = false
-    @EnvironmentObject var apolloViewModel: ApolloViewModel
     
     var body: some View {
         VStack {
             ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .foregroundColor(.green)
-                    .frame(height: 380)
+                Image("background2")
+                    .resizable()
+                    .cornerRadius(16)
                     .ignoresSafeArea()
+
                 VStack {
                     heading
                     buttonGroup
@@ -41,7 +45,7 @@ struct LeaderboardView: View {
                 Text("Pizza's").tag(Food.pizza)
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal)
+            .padding([.horizontal, .bottom])
         }
     }
     
@@ -76,7 +80,7 @@ struct LeaderboardView: View {
             ForEach(Array(getSortedBy(foodSelection).enumerated()), id: \.offset) { index, user in
                 HStack(alignment: .bottom) {
                     
-                    Text(String(index + 1))
+                    Text("\(index + 1).")
                         .padding()
                     
                     Spacer()
@@ -91,8 +95,8 @@ struct LeaderboardView: View {
                     
                 }
                 .background(RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(.white))
-                    .shadow(color: .black.opacity(0.1), radius: 2, x: 0, y: 5)
+                    .fill(isLightTheme() ? .white : .black)
+                    .shadow(color: isLightTheme() ? .black.opacity(0.1) : .white.opacity(0.4), radius: 2, x: 0, y: 5)
                 )
                 .padding([.top, .leading, .trailing])
                 .frame(maxWidth: .infinity)
@@ -178,6 +182,10 @@ struct LeaderboardView: View {
     
     private func getTopThree(_ selection: Food) -> [ApolloModel.User] {
         Array(getSortedBy(selection).prefix(3))
+    }
+    
+    private func isLightTheme() -> Bool {
+        colorScheme == .light
     }
 }
 

@@ -44,13 +44,14 @@ struct SettingsView: View {
                     }
                 })
                 
-                
                 Section {
-                    Label("Ga naar de website", systemImage: "link")
+                    Button {
+                        openURL(URL(string: "https://dre-van-den-hooff.github.io/worstenbroodjes-app/")!)
+                    } label: {
+                        Label("Ga naar de website", systemImage: "link")
+                    }
                 }
-                .onTapGesture {
-                    openURL(URL(string: "https://dre-van-den-hooff.github.io/worstenbroodjes-app/")!)
-                }
+                
             }
             .navigationTitle("Instellingen")
         }
