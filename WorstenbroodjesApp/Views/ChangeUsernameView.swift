@@ -6,21 +6,28 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct ChangeUsernameView: View {
     @State private var name: String = ""
+    @State private var succesToast = false
     @EnvironmentObject var apolloViewModel: ApolloViewModel
 
     var body: some View {
         Form {
-            TextField("Nieuwe gebruikersnaam", text: $name)
- 
-            Button("Bevestigen") {
-                // TODO: show success / error toast
-                apolloViewModel.updateUserName(id: apolloViewModel.loggedInUser.id, newName: name)
+            Section {
+                TextField("Nieuwe gebruikersnaam", text: $name)
+     
+                Button("Bevestigen") {
+                    apolloViewModel.updateUserName(id: apolloViewModel.loggedInUser.id, newName: name)
+                    succesToast.toggle()
+                }
             }
         }
-        .navigationTitle("Verander je gebruikersnaam")
+        .navigationTitle("Wijzig gebruikersnaam")
+        .toast(isPresenting: $succesToast) {
+            AlertToast(type: .complete(Color.green), title: "Username updated!")
+        }
     }
 }
 

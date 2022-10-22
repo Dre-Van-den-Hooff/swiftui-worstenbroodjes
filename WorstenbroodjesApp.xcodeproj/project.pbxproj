@@ -18,6 +18,8 @@
 		C993DAC828F712A300466C22 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = C993DAC728F712A300466C22 /* schema.json */; };
 		C993DACA28F7135C00466C22 /* Queries.graphql in Resources */ = {isa = PBXBuildFile; fileRef = C993DAC928F7135C00466C22 /* Queries.graphql */; };
 		C994569028FC3CB90025B22A /* ChangeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */; };
+		C9CCB33F29018F00001A86AF /* PositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9CCB33E29018F00001A86AF /* PositionView.swift */; };
+		C9D1D059290038D700213C5D /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C9D1D058290038D700213C5D /* AlertToast */; };
 		C9EC761428F6C5BA00938696 /* WorstenbroodjesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC761328F6C5BA00938696 /* WorstenbroodjesAppApp.swift */; };
 		C9EC761628F6C5BA00938696 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9EC761528F6C5BA00938696 /* ContentView.swift */; };
 		C9EC761828F6C5BB00938696 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9EC761728F6C5BB00938696 /* Assets.xcassets */; };
@@ -35,6 +37,7 @@
 		C993DAC728F712A300466C22 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		C993DAC928F7135C00466C22 /* Queries.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Queries.graphql; sourceTree = "<group>"; };
 		C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameView.swift; sourceTree = "<group>"; };
+		C9CCB33E29018F00001A86AF /* PositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionView.swift; sourceTree = "<group>"; };
 		C9EC761028F6C5BA00938696 /* WorstenbroodjesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorstenbroodjesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9EC761328F6C5BA00938696 /* WorstenbroodjesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorstenbroodjesAppApp.swift; sourceTree = "<group>"; };
 		C9EC761528F6C5BA00938696 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C993DAC528F703F200466C22 /* Apollo in Frameworks */,
+				C9D1D059290038D700213C5D /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +66,7 @@
 				C993DABF28F6F03200466C22 /* ProfileView.swift */,
 				C993DAC128F6F04C00466C22 /* SettingsView.swift */,
 				C994568F28FC3CB90025B22A /* ChangeUsernameView.swift */,
+				C9CCB33E29018F00001A86AF /* PositionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			name = WorstenbroodjesApp;
 			packageProductDependencies = (
 				C993DAC428F703F200466C22 /* Apollo */,
+				C9D1D058290038D700213C5D /* AlertToast */,
 			);
 			productName = WorstenbroodjesApp;
 			productReference = C9EC761028F6C5BA00938696 /* WorstenbroodjesApp.app */;
@@ -181,6 +187,7 @@
 			mainGroup = C9EC760728F6C5BA00938696;
 			packageReferences = (
 				C993DAC328F703F200466C22 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				C9D1D057290038D700213C5D /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = C9EC761128F6C5BA00938696 /* Products */;
 			projectDirPath = "";
@@ -241,6 +248,7 @@
 				C949423228F837F900FC7BA6 /* API.swift in Sources */,
 				C949423428F8396600FC7BA6 /* Network.swift in Sources */,
 				C9EC761428F6C5BA00938696 /* WorstenbroodjesAppApp.swift in Sources */,
+				C9CCB33F29018F00001A86AF /* PositionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,6 +459,14 @@
 				minimumVersion = 0.49.0;
 			};
 		};
+		C9D1D057290038D700213C5D /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -458,6 +474,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C993DAC328F703F200466C22 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		C9D1D058290038D700213C5D /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C9D1D057290038D700213C5D /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

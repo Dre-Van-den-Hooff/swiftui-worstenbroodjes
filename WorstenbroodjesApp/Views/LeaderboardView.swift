@@ -6,31 +6,39 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct LeaderboardView: View {
-    @State private var selection: Int? = 1
-    @State private var showSheet: Bool = false
+    @State private var showSheet = false
     @State private var amount = 1
     @State private var foodSelection: Food = .worstenbroodje
+    @State private var succesToast = false
     @EnvironmentObject var apolloViewModel: ApolloViewModel
     
     var body: some View {
         VStack {
-            heading
-            buttonGroup
-            topThree
-            Spacer()
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .foregroundColor(.green)
+                    .frame(height: 380)
+                    .ignoresSafeArea()
+                VStack {
+                    heading
+                    buttonGroup
+                    topThree
+                    Spacer()
+                }
+            }
             userList
-            Spacer()
         }
     }
     
     private var buttonGroup: some View {
         HStack {
-            Picker("", selection: $selection) {
-                Text("Worstenbroodjes").tag(1 as Int?)
-                Text("Panini's").tag(2 as Int?)
-                Text("Pizza's").tag(3 as Int?)
+            Picker("", selection: $foodSelection) {
+                Text("Worstenbroodjes").tag(Food.worstenbroodje)
+                Text("Panini's").tag(Food.panini)
+                Text("Pizza's").tag(Food.pizza)
             }
             .pickerStyle(.segmented)
             .padding(.horizontal)
@@ -65,7 +73,7 @@ struct LeaderboardView: View {
     
     private var userList: some View {
         ScrollView {
-            ForEach(Array(getSortedBy(selection!).enumerated()), id: \.offset) { index, user in
+            ForEach(Array(getSortedBy(foodSelection).enumerated()), id: \.offset) { index, user in
                 HStack(alignment: .bottom) {
                     
                     Text(String(index + 1))
@@ -78,7 +86,7 @@ struct LeaderboardView: View {
                     
                     Spacer()
                     
-                    getStats(of: selection!, user)
+                    getStats(of: foodSelection, user)
                         .padding()
                     
                 }
@@ -91,14 +99,20 @@ struct LeaderboardView: View {
             }
         }
         .padding(.horizontal)
+        .toast(isPresenting: $succesToast) {
+            AlertToast(type: .complete(Color.green), title: "Stats updated!")
+        }
     }
     
     private var topThree: some View {
         HStack {
-            ForEach(getTopThree(selection!)) { user in
-                Text(user.username)
+            ForEach(Array(getTopThree(foodSelection).enumerated()), id: \.offset) { index, user in
+                Spacer()
+                PositionView(position: index + 1, name: user.username)
+                Spacer()
             }
         }
+        .padding(.vertical)
     }
     
     private var sheetContent: some View {
@@ -133,52 +147,37 @@ struct LeaderboardView: View {
                     
                     let updatedStats = StatsInput(totalSpent: 0, worstenbroodjes: worstenbroodjes, pizzas: pizzas, muffins: 0, paninis: paninis)
                     
+                    // GraphQL mutation to update stats
                     apolloViewModel.updateStats(id: apolloViewModel.loggedInUser.id, stats: updatedStats)
-                    // TODO: Show success toast
+                    
+                    // Close sheet, show succes toast
+                    showSheet.toggle()
+                    succesToast.toggle()
                 }
-            }.buttonStyle(.borderless)
+            }
+            .buttonStyle(.borderless)
         }
     }
     
-    private func getStats(of selection: Int, _ user: ApolloModel.User) -> Text {
+    private func getStats(of selection: Food, _ user: ApolloModel.User) -> Text {
         switch selection {
-        case 1:
+        case .worstenbroodje:
             return Text(String(user.stats.worstenbroodjes))
-        case 2:
+        case .panini:
             return Text(String(user.stats.paninis))
-        case 3:
+        case .pizza:
             return Text(String(user.stats.pizzas))
         default:
             return Text("")
         }
     }
     
-    private func getSortedBy(_ selection: Int) -> [ApolloModel.User] {
-        switch selection {
-        case 1:
-            return apolloViewModel.users.sorted { (a, b) in
-                a.stats.worstenbroodjes > b.stats.worstenbroodjes
-            }
-        case 2:
-            return apolloViewModel.users.sorted { (a, b) in
-                a.stats.paninis > b.stats.paninis
-            }
-        case 3:
-            return apolloViewModel.users.sorted { (a, b) in
-                a.stats.pizzas > b.stats.pizzas
-            }
-        default:
-            return apolloViewModel.users
-        }
+    private func getSortedBy(_ selection: Food) -> [ApolloModel.User] {
+        apolloViewModel.getSortedBy(selection)
     }
     
-    private func getTopThree(_ selection: Int) -> [ApolloModel.User] {
+    private func getTopThree(_ selection: Food) -> [ApolloModel.User] {
         Array(getSortedBy(selection).prefix(3))
-    }
-    
-    enum Food: String, Identifiable {
-        case worstenbroodje, panini, pizza
-        var id: Self { self }
     }
 }
 
