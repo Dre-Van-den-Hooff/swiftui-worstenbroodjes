@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import SwiftUI
 
 class ApolloViewModel: ObservableObject {
     
     @Published private var model = createModel()
+    @Published var currentScheme: ColorScheme = .light
     
     var users: [ApolloModel.User] {
         model.users
@@ -19,7 +21,7 @@ class ApolloViewModel: ObservableObject {
         model.loggedInUser!
     }
     
-    init()  {
+    init() {
         fetchAllUsers()
     }
     
@@ -50,7 +52,11 @@ class ApolloViewModel: ObservableObject {
         }
     }
     
-    private func fetchAllUsers()  {
+    func toggleColorScheme(to chosenScheme: ColorScheme) -> Void {
+        currentScheme = chosenScheme
+    }
+    
+    private func fetchAllUsers() {        
         Network.shared.apolloClient.fetch(query: GetAllUsersQuery()) { result in
             switch result {
             case .success(let graphQLResult):
@@ -71,7 +77,7 @@ class ApolloViewModel: ObservableObject {
             switch result {
             case .success:
                 print("success")
-                // refetch users
+                self.fetchAllUsers()
             case .failure(let error):
                 print("Error! \(error)")
             }
@@ -83,7 +89,7 @@ class ApolloViewModel: ObservableObject {
             switch result {
             case .success:
                 print("success")
-                // refetch users
+                self.fetchAllUsers()
             case .failure(let error):
                 print("Error! \(error)")
             }

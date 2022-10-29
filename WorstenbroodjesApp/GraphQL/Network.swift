@@ -3,7 +3,7 @@
 //  WorstenbroodjesApp
 //
 //  Created by Dré Van den Hooff on 13/10/2022.
-//
+//  Copied from a tutorial
 
 import Foundation
 import Apollo

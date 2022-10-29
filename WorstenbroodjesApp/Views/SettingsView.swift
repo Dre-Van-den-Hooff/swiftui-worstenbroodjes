@@ -9,53 +9,48 @@ import SwiftUI
 
 struct SettingsView: View {
     @State private var darkmode = false
-    @State private var useSystemPreference = false
+    
     @Environment(\.openURL) var openURL
     @Environment(\.colorScheme) var colorScheme
-
-
+    @EnvironmentObject var apolloViewModel: ApolloViewModel
     
     var body: some View {
-        settingsList
-    }
-    
-    var settingsList: some View {
         NavigationView {
             Form {
-                Section(header: Text("App instellingen")) {
-                    Toggle(isOn: $darkmode, label : {
-                        Text("Dark mode")
-                    })
-                    .onChange(of: darkmode, perform: { value in
-                        // TODO: change to darkmode
-                    })
-                    
-                    Toggle(isOn: $useSystemPreference, label : {
-                        Text("Gebruik systeemvoorkeur")
-                    })
-                    .onChange(of: useSystemPreference, perform: { value in
-                        // TODO: Change to system preference
-                    })
-                }
-                
-                NavigationLink(destination: ChangeUsernameView(), label: {
-                    Section {
-                        Label("Verander gebruikersnaam", systemImage: "square.and.pencil")
-                    }
-                })
-                
-                Section {
-                    Button {
-                        openURL(URL(string: "https://dre-van-den-hooff.github.io/worstenbroodjes-app/")!)
-                    } label: {
-                        Label("Ga naar de website", systemImage: "link")
-                    }
-                }
-                
-            }
-            .navigationTitle("Instellingen")
+                settings
+                link
+            }.navigationTitle("Instellingen")
         }
- 
+    }
+    
+    var settings: some View {
+        Section(header: Text("App instellingen")) {
+            Toggle(isOn: $darkmode, label : {
+                Text("Dark mode")
+            })
+            .onChange(of: darkmode, perform: { value in
+                if value {
+                    apolloViewModel.toggleColorScheme(to: .dark)
+                } else {
+                    apolloViewModel.toggleColorScheme(to: .light)
+                }
+            })
+            NavigationLink(destination: ChangeUsernameView(), label: {
+                Section {
+                    Label("Verander gebruikersnaam", systemImage: "square.and.pencil")
+                }
+            })
+        }
+    }
+    
+    var link: some View {
+        Section {
+            Button {
+                openURL(URL(string: "https://dre-van-den-hooff.github.io/worstenbroodjes-app/")!)
+            } label: {
+                Label("Ga naar de website", systemImage: "link")
+            }
+        }
     }
 }
 

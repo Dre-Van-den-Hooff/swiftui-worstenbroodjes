@@ -14,6 +14,7 @@ struct WorstenbroodjesAppApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(apolloViewModel)
+                .environment(\.colorScheme, apolloViewModel.currentScheme)
         }
     }
 }

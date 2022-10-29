@@ -23,7 +23,7 @@ struct LeaderboardView: View {
             ZStack {
                 Image("background2")
                     .resizable()
-                    .cornerRadius(16)
+                    .cornerRadius(24)
                     .ignoresSafeArea()
 
                 VStack {
@@ -34,18 +34,6 @@ struct LeaderboardView: View {
                 }
             }
             userList
-        }
-    }
-    
-    private var buttonGroup: some View {
-        HStack {
-            Picker("", selection: $foodSelection) {
-                Text("Worstenbroodjes").tag(Food.worstenbroodje)
-                Text("Panini's").tag(Food.panini)
-                Text("Pizza's").tag(Food.pizza)
-            }
-            .pickerStyle(.segmented)
-            .padding([.horizontal, .bottom])
         }
     }
     
@@ -70,8 +58,21 @@ struct LeaderboardView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
+                .foregroundColor(.black)
             Spacer()
             Spacer()
+        }
+    }
+    
+    private var buttonGroup: some View {
+        HStack {
+            Picker("", selection: $foodSelection) {
+                Text("Worstenbroodjes").tag(Food.worstenbroodje)
+                Text("Panini's").tag(Food.panini)
+                Text("Pizza's").tag(Food.pizza)
+            }
+            .pickerStyle(.segmented)
+            .padding([.horizontal, .bottom])
         }
     }
     
