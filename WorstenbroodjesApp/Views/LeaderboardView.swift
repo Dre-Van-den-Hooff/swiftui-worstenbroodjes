@@ -50,6 +50,7 @@ struct LeaderboardView: View {
             .sheet(isPresented: $showSheet) {
                 sheetContent
                     .presentationDetents([.large, .medium, .fraction(0.75)])
+                    .preferredColorScheme(colorScheme)
             }
             
             Spacer()
@@ -96,7 +97,7 @@ struct LeaderboardView: View {
                     
                 }
                 .background(RoundedRectangle(cornerRadius: 8)
-                    .fill(isLightTheme() ? .white : .black)
+                    .fill(isLightTheme() ? .white : .spacegray)
                     .shadow(color: isLightTheme() ? .black.opacity(0.1) : .white.opacity(0.4), radius: 2, x: 0, y: 5)
                 )
                 .padding([.top, .leading, .trailing])
@@ -196,5 +197,9 @@ struct LeaderboardView_Previews: PreviewProvider {
         LeaderboardView()
             .environmentObject(ApolloViewModel())
     }
+}
+
+extension Color {
+    static let spacegray = Color(red: 79 / 255.0, green: 91 / 255.0, blue: 102 / 255.0)
 }
 
