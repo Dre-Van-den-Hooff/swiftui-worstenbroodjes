@@ -21,7 +21,7 @@ struct LeaderboardView: View {
     var body: some View {
         VStack {
             ZStack {
-                Image("background2")
+                Image("background")
                     .resizable()
                     .cornerRadius(24)
                     .ignoresSafeArea()
@@ -37,6 +37,7 @@ struct LeaderboardView: View {
         }
     }
     
+    // Heading
     private var heading: some View {
         HStack {
             Button {
@@ -65,6 +66,7 @@ struct LeaderboardView: View {
         }
     }
     
+    // Selection buttons
     private var buttonGroup: some View {
         HStack {
             Picker("", selection: $foodSelection) {
@@ -77,6 +79,7 @@ struct LeaderboardView: View {
         }
     }
     
+    // Leaderboard of users
     private var userList: some View {
         ScrollView {
             ForEach(Array(getSortedBy(foodSelection).enumerated()), id: \.offset) { index, user in
@@ -110,6 +113,7 @@ struct LeaderboardView: View {
         }
     }
     
+    // Top 3 users
     private var topThree: some View {
         HStack {
             ForEach(Array(getTopThree(foodSelection).enumerated()), id: \.offset) { index, user in
@@ -121,6 +125,7 @@ struct LeaderboardView: View {
         .padding(.vertical)
     }
     
+    // Content on the drawer sheet
     private var sheetContent: some View {
         Form {
             Section {
@@ -165,6 +170,7 @@ struct LeaderboardView: View {
         }
     }
     
+    // Return stats based on selected food
     private func getStats(of selection: Food, _ user: ApolloModel.User) -> Text {
         switch selection {
         case .worstenbroodje:
@@ -178,24 +184,19 @@ struct LeaderboardView: View {
         }
     }
     
+    // Sort users based on selected food
     private func getSortedBy(_ selection: Food) -> [ApolloModel.User] {
         apolloViewModel.getSortedBy(selection)
     }
     
+    // Get top 3 users
     private func getTopThree(_ selection: Food) -> [ApolloModel.User] {
         Array(getSortedBy(selection).prefix(3))
     }
     
+    // Return boolean whether light theme is active or not
     private func isLightTheme() -> Bool {
         colorScheme == .light
-    }
-}
-
-
-struct LeaderboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        LeaderboardView()
-            .environmentObject(ApolloViewModel())
     }
 }
 

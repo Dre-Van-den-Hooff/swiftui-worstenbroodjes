@@ -9,8 +9,9 @@ import SwiftUI
 import AlertToast
 
 struct ChangeUsernameView: View {
-    @State private var name: String = ""
+    @State private var name = ""
     @State private var succesToast = false
+    @State private var errorToast = false
     @EnvironmentObject var apolloViewModel: ApolloViewModel
 
     var body: some View {
@@ -19,8 +20,13 @@ struct ChangeUsernameView: View {
                 TextField("Nieuwe gebruikersnaam", text: $name)
      
                 Button("Bevestigen") {
-                    apolloViewModel.updateUserName(id: apolloViewModel.loggedInUser.id, newName: name)
-                    succesToast.toggle()
+                    // New name should be 3 characters or more
+                    if name.count >= 3 {
+                        apolloViewModel.updateUserName(id: apolloViewModel.loggedInUser.id, newName: name)
+                        succesToast.toggle()
+                    } else {
+                        errorToast.toggle()
+                    }
                 }
             }
         }
@@ -28,12 +34,8 @@ struct ChangeUsernameView: View {
         .toast(isPresenting: $succesToast) {
             AlertToast(type: .complete(Color.green), title: "Username updated!")
         }
-    }
-}
-
-struct ChangeUsernameView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChangeUsernameView()
-            .environmentObject(ApolloViewModel())
+        .toast(isPresenting: $errorToast) {
+            AlertToast(type: .error(Color.red), title: "Invalid username!")
+        }
     }
 }

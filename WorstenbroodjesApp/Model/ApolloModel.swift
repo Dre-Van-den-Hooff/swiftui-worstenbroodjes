@@ -13,12 +13,14 @@ struct ApolloModel: Decodable {
     var users: [User] = []
     var loggedInUser: User?
     
+    // Make User objects of request data
     mutating func processAllUsers(_ users: [UserData]) -> Void {
         self.users = users.map { user in
             User(user)
         }
     }
     
+    // Mock login using hardcoded id
     mutating func mockLogin(id: String) -> Void {
         self.loggedInUser = users.first { $0.id == id }
     }

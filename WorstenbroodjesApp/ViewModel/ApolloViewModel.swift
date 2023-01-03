@@ -33,6 +33,8 @@ class ApolloViewModel: ObservableObject {
         model.mockLogin(id: id)
     }
     
+    
+    // Sort users based on selected food
     func getSortedBy(_ selection: Food) -> [ApolloModel.User] {
         switch selection {
         case .worstenbroodje:
@@ -52,12 +54,18 @@ class ApolloViewModel: ObservableObject {
         }
     }
     
+    
+    // Toggle dark/light mode
     func toggleColorScheme(to chosenScheme: ColorScheme) -> Void {
         currentScheme = chosenScheme
     }
     
-    private func fetchAllUsers() {        
-        Network.shared.apolloClient.fetch(query: GetAllUsersQuery()) { result in
+    
+    // MARK: -- API Calls
+    
+    // Fetch all users [query]
+    func fetchAllUsers() {
+        Network.shared.apolloClient.fetch(query: GetAllUsersQuery(), cachePolicy: .fetchIgnoringCacheData) { result in
             switch result {
             case .success(let graphQLResult):
                 if let users = graphQLResult.data?.getAllUsers {
@@ -72,11 +80,13 @@ class ApolloViewModel: ObservableObject {
         }
     }
     
+    
+    // Update username [mutation]
     func updateUserName(id: String, newName: String) {
         Network.shared.apolloClient.perform(mutation: UpdateUsernameMutation(id: id, newName: newName)) { result in
             switch result {
             case .success:
-                print("success")
+                // Refetch users
                 self.fetchAllUsers()
             case .failure(let error):
                 print("Error! \(error)")
@@ -84,11 +94,13 @@ class ApolloViewModel: ObservableObject {
         }
     }
     
+    
+    // Update user stats [mutation]
     func updateStats(id: String, stats: StatsInput) {
         Network.shared.apolloClient.perform(mutation: UpdateUserStatsMutation(id: id, stats: stats)) { result in
             switch result {
             case .success:
-                print("success")
+                // Refresh users
                 self.fetchAllUsers()
             case .failure(let error):
                 print("Error! \(error)")
